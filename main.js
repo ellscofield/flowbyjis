@@ -12,9 +12,9 @@ const texts = [
 let textIndex = 0;
 let charIndex = 0;
 
-const typingEl = document.getElementById("typing");
-const button = document.getElementById("startBtn");
-const typeSound = document.getElementById("typeSound");
+let typingEl;
+let button;
+let typeSound;
 
 function typeText() {
     if (textIndex < texts.length) {
@@ -28,7 +28,6 @@ function typeText() {
             charIndex++;
             setTimeout(typeText, 60);
         } else {
-            // pindah ke kalimat berikutnya
             setTimeout(() => {
                 typingEl.innerHTML = "";
                 charIndex = 0;
@@ -37,7 +36,6 @@ function typeText() {
             }, 1200);
         }
     } else {
-        // tampilkan tombol
         button.style.display = "inline-block";
     }
 }
@@ -51,7 +49,6 @@ function showFlowers() {
     music.volume = 0;
     music.play();
 
-    // fade in biar smooth
     let vol = 0;
     const fade = setInterval(() => {
         if (vol < 0.5) {
@@ -62,5 +59,15 @@ function showFlowers() {
         }
     }, 200);
 }
+
+window.onload = () => {
+    document.body.classList.remove("container");
+
+    typingEl = document.getElementById("typing");
+    button = document.getElementById("startBtn");
+    typeSound = document.getElementById("typeSound");
+
+    typeText();
+};
 
 window.onload = typeText;
