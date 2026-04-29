@@ -1,7 +1,3 @@
-onload = () =>{
-        document.body.classList.remove("container");
-};
-
 const texts = [
     "Hai kamu...",
     "Aku ga jago ngomong...",
@@ -15,11 +11,22 @@ let charIndex = 0;
 let typingEl;
 let button;
 
+window.onload = () => {
+    document.body.classList.remove("container");
+
+    typingEl = document.getElementById("typing");
+    button = document.getElementById("startBtn");
+
+    // 🔥 PENTING: pastikan bunga tersembunyi
+    document.getElementById("flowerScene").style.display = "none";
+
+    typeText();
+};
+
 function typeText() {
     if (textIndex < texts.length) {
         if (charIndex < texts[textIndex].length) {
             typingEl.innerHTML += texts[textIndex].charAt(charIndex);
-
             charIndex++;
             setTimeout(typeText, 60);
         } else {
@@ -36,14 +43,27 @@ function typeText() {
 }
 
 function showFlowers() {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("flowerScene").style.display = "block";
-
+    const intro = document.getElementById("intro");
+    const flower = document.getElementById("flowerScene");
     const music = document.getElementById("bgMusic");
-    
-    music.volume = 0;
-    music.play();
 
+    // hide intro
+    intro.style.display = "none";
+
+    // show flower
+    flower.style.display = "block";
+
+    // cinematic reset
+    flower.classList.remove("cinematic");
+    void flower.offsetWidth;
+    flower.classList.add("cinematic");
+
+    // music start
+    music.currentTime = 0;
+    music.volume = 0;
+    music.play().catch(e => console.log(e));
+
+    // fade in music
     let vol = 0;
     const fade = setInterval(() => {
         if (vol < 0.5) {
@@ -52,14 +72,5 @@ function showFlowers() {
         } else {
             clearInterval(fade);
         }
-    }, 200);
+    }, 120);
 }
-
-window.onload = () => {
-    document.body.classList.remove("container");
-
-    typingEl = document.getElementById("typing");
-    button = document.getElementById("startBtn");
-
-    typeText();
-};
