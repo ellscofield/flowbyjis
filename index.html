@@ -14,8 +14,28 @@
     <div class="intro" id="intro">
     <div class="intro-box">
         <p class="typing" id="typing"></p>
-        <button id="startBtn" onclick="showFlowers()">Lihat Kejutan 🌸</button>
+        <button id="startBtn" onclick="showFlowers()">Read the letter 💌</button>
     </div>
+    </div>
+
+    <!-- ENVELOPE SCENE -->
+    <div id="envelopeScene" style="display:none;">
+      <div class="envelope" onclick="openEnvelope()">
+        <div class="flap"></div>
+
+        <div class="letter">
+          <p>For you..</p>
+          <p>Some days feel heavier than others, and that’s okay.</p>
+          <p>I hope this small letter finds you at the right time, like a quiet pause in a busy day.</p>
+          <p>May your worries feel a little lighter, and your heart a little calmer tonight 🌙</p>
+          <p>Take your time. Everything will slowly fall into place ✨</p>
+          <p>I’m sorry for making you wait… thank you for staying patient.</p>
+
+          <button class="nextBtn" onclick="goToFlowers(event)">
+            See the surprise 🌸
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- AUDIO -->
