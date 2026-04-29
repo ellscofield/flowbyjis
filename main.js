@@ -14,16 +14,11 @@ let charIndex = 0;
 
 let typingEl;
 let button;
-let typeSound;
 
 function typeText() {
     if (textIndex < texts.length) {
         if (charIndex < texts[textIndex].length) {
             typingEl.innerHTML += texts[textIndex].charAt(charIndex);
-
-            // 🔊 suara ketikan
-            typeSound.currentTime = 0;
-            typeSound.play();
 
             charIndex++;
             setTimeout(typeText, 60);
@@ -65,9 +60,6 @@ window.onload = () => {
 
     typingEl = document.getElementById("typing");
     button = document.getElementById("startBtn");
-    typeSound = document.getElementById("typeSound");
 
     typeText();
 };
-
-window.onload = typeText;
