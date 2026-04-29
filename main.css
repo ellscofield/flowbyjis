@@ -31,11 +31,30 @@ body {
   background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), linear-gradient(90deg, rgb(7, 107, 42), rgb(240, 240, 240));
 }
 
+.heart {
+  position: fixed;
+  top: -10px;
+  animation: fall 5s linear forwards;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
 .intro {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: black;
+    background: rgb(235, 54, 159);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,6 +74,108 @@ body {
     display: inline-block;
     padding-right: 5px;
     animation: blink 0.7s infinite;
+}
+
+/* FIX FULL SCREEN */
+body {
+  margin: 0;
+  padding: 0;
+  background: #111;
+}
+
+/* ENVELOPE SCENE FULL */
+#envelopeScene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+}
+
+/* ENVELOPE LEBIH LUAS & RESPONSIVE */
+.envelope {
+  position: relative;
+  width: min(80vw, 500px);  
+  height: calc(min(80vw, 500px) * 0.62); 
+  
+  background: #ff6b81;
+  border-radius: 12px;
+  overflow: hidden;
+
+  box-shadow: 0 10px 35px rgba(255, 107, 129, 0.35);
+}
+
+/* FLAP ikut menyesuaikan ukuran envelope */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff4757;
+
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+
+/* LETTER */
+.letter {
+  position: absolute;
+  width: 85%;
+  height: 80%;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  padding: 15px;
+  text-align: center;
+  transition: 0.6s ease;
+  border-radius: 6px;
+  z-index: 999;
+
+  overflow-y: auto;      
+  -webkit-overflow-scrolling: touch; 
+}
+
+.letter p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0;
+  color: #333;
+}
+
+.letter.open {
+  transform: translate(-50%, -50%);
+}
+
+.nextBtn {
+  display: inline-block !important;
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ff6fa5;
+  color: white;
+}
+
+.nextBtn:hover {
+  background: #ff4757;
+}
+
+@media (max-width: 600px) {
+  .letter {
+    height: 70%;
+    overflow-y: auto;
+  }
 }
 
 button {
@@ -87,6 +208,7 @@ button:hover {
   z-index: 10;
   --fl-speed: 0.3s;
 }
+
 .flower--1 {
   -webkit-animation: moving-flower-1 4s linear infinite;
           animation: moving-flower-1 4s linear infinite;
